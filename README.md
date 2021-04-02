@@ -21,7 +21,19 @@ This is the one I reccomend for most uses, and as the name suggests, it writes a
 Where mode is either Shift.MSBfirst or Shift.LSBfirst, and the default is MSB.
 
 ### shift_number
-This one shift out the number, but only to its length, so if you want to write 17 it will only shift those 5 bits. This may result in old data from prevoius writes staying on the register, but I've stumbled across some use cases for this behavior too.
+This one shift out the number, but only to its length, so if you want to write 17 it will only shift those 5 bits. This may result in old data from prevoius writes staying on the register, but I've stumbled across some use cases for this behavior too. It takes the same parameters as shift_byte
 
 
 After writing to the register you'll need to latch it, which you can do with ```latch(active_low=True)``` If your register has an active high latch pin you can set active_low to False, and it will pulse it to get the data to the output of the register
+
+Example
+-----
+```python
+from pico_shift import Shift
+
+shifty = Shift(0, 1, 2)
+shifty.shift_byte(0x55, Shift.MSBfirst)
+shifty.latch()
+shifty.shift_number(13, Shift.LSBfirst)
+shifty.latch
+```
