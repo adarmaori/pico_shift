@@ -35,5 +35,6 @@ shifty = Shift(0, 1, 2)
 shifty.shift_byte(0x55, Shift.MSBfirst)
 shifty.latch()
 shifty.shift_number(13, Shift.LSBfirst)
-shifty.latch
+shifty.latch()
 ```
+This example was written for a 74HC595 where GPIO0 was connected to pin 11 on the 595, GPIO1 is connected to pin 14 and GPIO2 is connected to pin 12.
